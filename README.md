@@ -1,8 +1,9 @@
 ### Mysql backup s3
 
 Variables used:
+
 | Variable                |  Description                        |
---------------------------|-------------------------------------|
+|-------------------------|-------------------------------------|
 | `MYSQL_HOST`            | Mysql host                          | 
 | `MYSQL_PORT`            | Mysql port                          |
 | `MYSQL_DATABASE`        | Mysql target database               |
