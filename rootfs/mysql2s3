@@ -7,11 +7,13 @@ echo "[$(date -Iseconds)] Started mysqldump"
 
 mysqldump -h "${MYSQL_HOST}" -P "${MYSQL_PORT}" -u "${MYSQL_USER}" -p"${MYSQL_PASSWORD}" "${MYSQL_DATABASE}" > "${filename}"
 
+echo "[$(date -Iseconds)] Compressing mysqldump"
+
 gzip "${filename}"
 
 echo "[$(date -Iseconds)] Started s3 upload"
 aws s3 cp "${filename}.gz" "s3://${AWS_S3_BUCKET}/${s3filename}"
 
-rm -rf filename
+rm -rf "${filename}.gz"
 
 echo "[$(date -Iseconds)] Done"
