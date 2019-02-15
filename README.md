@@ -1,6 +1,7 @@
-### Mysql backup s3
+# Mysql backup s3
 
-Variables used:
+## Description
+Easily back up from cloudSQL or any mysql instance to AWS S3.
 
 | Variable                |  Description                        |
 |-------------------------|-------------------------------------|
