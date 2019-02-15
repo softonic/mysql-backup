@@ -3,15 +3,15 @@
 filename=$(mktemp)
 s3filename="${AWS_S3_FILE_PREFIX}-$(date +%s).sql.gz"
 
-echo "[$(date --rfc-3339=seconds)] Started mysqldump"
+echo "[$(date -Iseconds)] Started mysqldump"
 
 mysqldump -h "${MYSQL_HOST}" -P "${MYSQL_PORT}" -u "${MYSQL_USER}" -p"${MYSQL_PASSWORD}" "${MYSQL_DATABASE}" > "${filename}"
 
 gzip "${filename}"
 
-echo "[$(date --rfc-3339=seconds)] Started s3 upload"
+echo "[$(date -Iseconds)] Started s3 upload"
 aws s3 cp "${filename}.gz" "s3://${AWS_S3_BUCKET}/${s3filename}"
 
 rm -rf filename
 
-echo "[$(date --rfc-3339=seconds)] Done"
+echo "[$(date -Iseconds)] Done"
