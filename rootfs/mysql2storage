@@ -1,0 +1,36 @@
+#!/bin/bash -e
+
+filename=$(mktemp)
+
+
+echo "[$(date -Iseconds)] Started mysqldump"
+
+mysqldump -h "${MYSQL_HOST}" -P "${MYSQL_PORT}" -u "${MYSQL_USER}" -p"${MYSQL_PASSWORD}" "${MYSQL_DATABASE}" > "${filename}"
+
+echo "[$(date -Iseconds)] Compressing mysqldump"
+
+gzip "${filename}"
+
+
+if [[ -v "AWS_ACCESS_KEY_ID" ]]; then
+
+	s3filename="${AWS_S3_FILE_PREFIX}-$(date +%s).sql.gz"
+
+	echo "[$(date -Iseconds)] Started s3 upload"
+	aws s3 cp "${filename}.gz" "s3://${AWS_S3_BUCKET}/${s3filename}"
+
+	echo "[$(date -Iseconds)] Done"
+fi
+
+if [[ -v "GOOGLE_APPLICATION_CREDENTIALS" ]]; then
+
+	gcsfilename="${GCP_GCS_FILE_PREFIX}-$(date +%s).sql.gz"
+
+        echo "[$(date -Iseconds)] Started gcs upload"
+        gsutil cp "${filename}.gz" "gs://${GCP_GCS_BUCKET}/${gcsfilename}"
+
+        echo "[$(date -Iseconds)] Done"
+fi
+
+
+rm -rf "${filename}.gz"
