@@ -26,6 +26,8 @@ if [[ -v "GOOGLE_APPLICATION_CREDENTIALS" ]]; then
 
 	gcsfilename="${GCP_GCS_FILE_PREFIX}-$(date +%s).sql.gz"
 
+	gcloud auth activate-service-account --key-file=${GOOGLE_APPLICATION_CREDENTIALS}
+
         echo "[$(date -Iseconds)] Started gcs upload"
         gsutil cp "${filename}.gz" "gs://${GCP_GCS_BUCKET}/${gcsfilename}"
 
