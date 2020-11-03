@@ -14,6 +14,7 @@ Easily back up from cloudSQL or any mysql instance to AWS S3.
 | `AWS_SECRET_ACCESS_KEY`           | AWS S3 secretAccessKey               |
 | `AWS_S3_FILE_PREFIX`              | Prefix to generate AWS s3 file name  |
 | `AWS_S3_BUCKET`                   | Target S3 bucket                     |
+| `AWS_ENDPOINT_URL`                | Override S3 URL with the given URL   |
 | `GOOGLE_APPLICATION_CREDENTIALS`  | GCP json credentials                 |
 | `GCP_GCS_FILE_PREFIX`             | Prefix to generate GCP gcs file name |
 | `GCP_GCS_BUCKET`                  | Target GCS bucket                    |
