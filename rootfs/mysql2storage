@@ -17,7 +17,7 @@ if [[ -v "AWS_ACCESS_KEY_ID" ]]; then
 	s3filename="${AWS_S3_FILE_PREFIX}-$(date +%s).sql.gz"
 
 	echo "[$(date -Iseconds)] Started s3 upload"
-        if [[ -v "AWS_ENDPOINT_URL" ]];then
+	if [[ -v "AWS_ENDPOINT_URL" ]];then
 		aws --endpoint-url ${AWS_ENDPOINT_URL} s3 cp "${filename}.gz" "s3://${AWS_S3_BUCKET}/${s3filename}"
 	else
 		aws s3 cp "${filename}.gz" "s3://${AWS_S3_BUCKET}/${s3filename}"
