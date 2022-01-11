@@ -5,9 +5,14 @@ Easily back up from cloudSQL or any mysql instance to AWS S3.
 
 | Variable                          |  Description                         |
 |-----------------------------------|--------------------------------------|
-| `MYSQL_HOST`                      | Mysql host                           | 
+| `MYSQL_HOST`                      | Mysql host                           |
 | `MYSQL_PORT`                      | Mysql port                           |
-| `MYSQL_DATABASE`                  | Mysql target database                |
+| `MYSQL_DATABASE`                  | Mysql target databases.              |
+|                                   | Space-separated if more than one db, |
+|                                   | e.g. MYSQL_DATABASE="db-1 db-2 db3". |
+|                                   | If empty or not defined - will try   |
+|                                   | to dump all databases by using       |
+|                                   | mysqldump --all-databases flag       |
 | `MYSQL_USER`                      | Mysql user                           |
 | `MYSQL_PASSWORD`                  | Mysql password                       |
 | `AWS_ACCESS_KEY_ID`               | AWS S3 accessKeyId                   |
@@ -15,7 +20,9 @@ Easily back up from cloudSQL or any mysql instance to AWS S3.
 | `AWS_S3_FILE_PREFIX`              | Prefix to generate AWS s3 file name  |
 | `AWS_S3_BUCKET`                   | Target S3 bucket                     |
 | `AWS_ENDPOINT_URL`                | Override S3 URL with the given URL   |
-| `GOOGLE_APPLICATION_CREDENTIALS`  | GCP json credentials                 |
+| `GOOGLE_APPLICATION_CREDENTIALS`  | GCP json credentials file path       |
+|                                   | You can mount this file as container |
+|                                   | volume                               |
 | `GCP_GCS_FILE_PREFIX`             | Prefix to generate GCP gcs file name |
 | `GCP_GCS_BUCKET`                  | Target GCS bucket                    |
 

@@ -5,7 +5,13 @@ filename=$(mktemp)
 
 echo "[$(date -Iseconds)] Started mysqldump"
 
-mysqldump -h "${MYSQL_HOST}" -P "${MYSQL_PORT}" -u "${MYSQL_USER}" -p"${MYSQL_PASSWORD}" "${MYSQL_DATABASE}" > "${filename}"
+if [ -z "$MYSQL_DATABASE" ]; then
+	MYSQL_DATABASE="--all-databases"
+else
+	MYSQL_DATABASE="--databases ${MYSQL_DATABASE}"
+fi
+
+mysqldump -h "${MYSQL_HOST}" -P "${MYSQL_PORT}" -u "${MYSQL_USER}" -p"${MYSQL_PASSWORD}" ${MYSQL_DATABASE} > "${filename}"
 
 echo "[$(date -Iseconds)] Compressing mysqldump"
 
